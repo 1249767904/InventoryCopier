@@ -1,0 +1,8 @@
+name: InventoryCopier
+version: '${project.version}'
+main: plug.elijah.inventorycopier.InventoryCopier
+api-version: '1.16'
+author: Elijaaaaaah
+commands:
+  ic:
+    description: Copy Inventory
