@@ -6,3 +6,4 @@ author: Elijaaaaaah
 commands:
   ic:
     description: Copy Inventory
+    permission: invcpoier.use

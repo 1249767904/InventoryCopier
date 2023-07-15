@@ -20,21 +20,23 @@ public class InvCommand implements CommandExecutor {
             return true;
         }
         Player sd = (Player)sender;
-        sender.sendMessage("你的名字: " + sd.getName());
+        if(!(sd.isOp())){
+            sender.sendMessage(ChatColor.BLUE + "[" + ChatColor.YELLOW + "InventoryCopier" + ChatColor.BLUE + "] " + ChatColor.RED + "缺少使用权限invcpoier.use！");
+        }
         if(args.length == 1){
             String nick = args[0];
-            sender.sendMessage("被复制玩家名: " + nick);
             for(Player p : Bukkit.getOnlinePlayers()){
                 if(nick.equals(p.getName())){
                     // 处理背包复制
                         sd.getInventory().setContents(p.getInventory().getContents());
                         sender.sendMessage(ChatColor.BLUE + "[" + ChatColor.YELLOW + "InventoryCopier" + ChatColor.BLUE + "] " + ChatColor.GREEN + "复制完成！");
-                }else if(!(nick.equals(p.getName()))){
-                    sender.sendMessage(ChatColor.BLUE + "[" + ChatColor.YELLOW + "InventoryCopier" + ChatColor.BLUE + "] " + ChatColor.RED + "玩家不存在或名称不完整！");
-                    sender.sendMessage(ChatColor.BLUE + "[" + ChatColor.YELLOW + "InventoryCopier" + ChatColor.BLUE + "] " + ChatColor.RED + "正确的使用方法: " + ChatColor.GREEN + "/ic <玩家名>");
-                    sender.sendMessage(ChatColor.RED + "注意！请输入玩家完整名称以确认复制对象！");
+                        return true;
                 }
             }
+            sender.sendMessage(ChatColor.BLUE + "[" + ChatColor.YELLOW + "InventoryCopier" + ChatColor.BLUE + "] " + ChatColor.RED + "玩家不存在或名称不完整！");
+            sender.sendMessage(ChatColor.BLUE + "[" + ChatColor.YELLOW + "InventoryCopier" + ChatColor.BLUE + "] " + ChatColor.RED + "正确的使用方法: " + ChatColor.GREEN + "/ic <玩家名>");
+            sender.sendMessage(ChatColor.RED + "注意！请输入玩家完整名称以确认复制对象！");
+            return true;
         } else if (args.length >= 1) {
             sender.sendMessage(ChatColor.BLUE + "[" + ChatColor.YELLOW + "InventoryCopier" + ChatColor.BLUE + "] " + ChatColor.RED + "指令参数过多！ ");
             sender.sendMessage(ChatColor.BLUE + "[" + ChatColor.YELLOW + "InventoryCopier" + ChatColor.BLUE + "] " + ChatColor.RED + "正确的使用方法: " + ChatColor.GREEN + "/ic <玩家名>");
